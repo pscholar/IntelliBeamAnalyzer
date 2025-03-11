@@ -1,0 +1,30 @@
+numpy>=1.19.2 # for numerical calculations
+sphinx>=3.3.1  # generating documentation
+sphinx_rtd_theme>=0.4.3  # docs theme
+sympy>=1.10  # for analytical integration
+sphinxcontrib-bibtex ##for sphinx bib importing
+plotly>=4.14.1
+#kaleido # for saving figures, removed to make loading in google colab faster
+dash
+dash-bootstrap-components<1
+dash-core-components
+dash-renderer
+dash-table
+gunicorn
+dash-extensions==0.0.44
+pytest
+jupyter>=1.0.0
+Werkzeug
+APScheduler
+PyQt5
+pyqt5-tools
+PyQtWebEngine
+PyQtChart 
+PyQtDataVisualization 
+PyQt3D  
+PyQtSql 
+PyQtBluetooth
+matplotlib
+requests
+openai
+anthropic

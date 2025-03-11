@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI for Structural Analysis</title>
+    <style>
+      body {
+        font-family: serif, sans-serif;
+        background-color: #080707e3;
+        color: #ffffff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        text-align: center;
+      }
+      h1 {
+        color: #ffffff;
+        margin-bottom: 24px;
+      }
+      svg {
+        max-width: 600px;
+        height: auto;
+      }
+      .beam {
+        stroke: #ff6f61;
+        stroke-width: 8;
+      }
+      .text {
+        font-family: serif, sans-serif;
+        fill: #ffffff;
+        font-size: 20px;
+      }
+      .support {
+        fill: #6c63ff;
+      }
+      .load {
+        stroke: #ffcc00;
+        stroke-width: 4;
+        fill: none;
+        marker-end: url(#arrowhead);
+      }
+      .question {
+        font-size: 24px;
+        font-weight: bold;
+      }
+      @keyframes move-load {
+        0% {
+          transform: translateX(0px);
+        }
+        50% {
+          transform: translateX(200px);
+        }
+        100% {
+          transform: translateX(400px);
+        }
+      }
+      .animated-load {
+        animation: move-load 3s infinite alternate linear;
+      }
+      text{
+        font-family: serif, sans-serif;
+        fill: #ffffff;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Artificial Intelligence in Structural Analysis</h1>
+      <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+        <!-- Arrowhead Marker -->
+        <defs>
+          <marker
+            id="arrowhead"
+            markerWidth="10"
+            markerHeight="7"
+            refX="10"
+            refY="3.5"
+            orient="auto"
+          >
+            <polygon points="0 0, 10 3.5, 0 7" fill="#ffcc00" />
+          </marker>
+        </defs>
+
+        <!-- Beam and Supports -->
+        <rect x="200" y="250" width="400" height="20" fill="#ff6f61" />
+        <rect x="180" y="270" width="40" height="40" class="support" />
+        <rect x="580" y="270" width="40" height="40" class="support" />
+
+        <!-- Load -->
+        <line x1="200" y1="100" x2="200" y2="250" class="load animated-load" />
+
+        <!-- Text Labels 
+         <text x="190" y="330" class="text">Support A</text>
+        <text x="570" y="330" class="text">Support B</text>
+        <text x="370" y="90" class="text">Load</text>-->
+
+        <!-- Question Text -->
+        <text x="100" y="50" font-size="32" class="text question">
+          Can LLMs be reliable structural analysis agents?
+        </text>
+      </svg>
+    </div>
+  </body>
+</html>
