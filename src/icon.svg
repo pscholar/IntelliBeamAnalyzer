@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Background Circle -->
+  <circle cx="50" cy="50" r="45" fill="#2c3e50" />
+  <!-- Neural Network Lines (AI Representation) -->
+  <line x1="30" y1="30" x2="50" y2="50" stroke="#00ff88" stroke-width="2" />
+  <line x1="70" y1="30" x2="50" y2="50" stroke="#00ff88" stroke-width="2" />
+  <line x1="30" y1="70" x2="50" y2="50" stroke="#00ff88" stroke-width="2" />
+  <line x1="70" y1="70" x2="50" y2="50" stroke="#00ff88" stroke-width="2" />
+  <circle cx="50" cy="50" r="5" fill="#00ff88" />
+  <!-- Structural Beam (Engineering Representation) -->
+  <rect x="20" y="60" width="60" height="10" fill="#3498db" />
+  <rect x="35" y="50" width="10" height="20" fill="#3498db" />
+  <rect x="55" y="50" width="10" height="20" fill="#3498db" />
+  <!-- AI Brain Icon -->
+  <path d="M50 20a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5z" fill="#00ff88" />
+  <path d="M50 25a2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5 2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5z" fill="#2c3e50" />
+</svg>

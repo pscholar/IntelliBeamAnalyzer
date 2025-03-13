@@ -1,5 +1,4 @@
 import os
-import sys
 from PyQt5 import QtCore, QtWidgets, QtWebEngineWidgets
 from abstractclasses.abstract_pdf_generator import AbstractPDFGenerator
 
@@ -12,8 +11,7 @@ class PDFGenerator(AbstractPDFGenerator):
                 temp_html_path = self.save_content_to_temp_file(content, 'html')
                 self.html_to_pdf(temp_html_path, output_pdf)
             elif file_name:
-                current_dir = os.path.dirname(os.path.realpath(__file__))
-                file_name = os.path.join(current_dir, file_name)
+                print("here")
                 self.html_to_pdf(file_name, output_pdf)
             else:
                 raise ValueError("Either content or file_name must be provided"
@@ -28,18 +26,20 @@ class PDFGenerator(AbstractPDFGenerator):
             f.write(content)
         return temp_file_path
     
-    def html_to_pdf(self,html, pdf):
-        page = QtWebEngineWidgets.QWebEnginePage()
-        def handle_print_finished(filename, status):
-            print("Saved Report as PDF To: ", filename, status)
-        def handle_load_finished(status):
-            if status:
-                page.printToPdf(pdf)
-            else:
-                print("Failed to Save Report as PDF")
-        page.pdfPrintingFinished.connect(handle_print_finished)
-        page.loadFinished.connect(handle_load_finished)
-        page.load(QtCore.QUrl.fromLocalFile(html))
+    def html_to_pdf(self, html, pdf):
+        self.page = QtWebEngineWidgets.QWebEnginePage()
+        self.page.pdfPrintingFinished.connect(self.handle_print_finished)
+        self.page.loadFinished.connect(lambda status: self.handle_load_finished(status, pdf))
+        self.page.load(QtCore.QUrl.fromLocalFile(html))
+    
+    def handle_print_finished(self, filename, status):
+        print(f"Saved Report as PDF To: {filename}, Status: {status}")
+
+    def handle_load_finished(self, status, pdf):
+        if status:
+            self.page.printToPdf(pdf)
+        else:
+            print("Failed to Save Report as PDF")
         
 
 

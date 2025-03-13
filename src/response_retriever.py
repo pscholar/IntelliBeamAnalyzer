@@ -1,7 +1,7 @@
 import re
 from abstractclasses.abstract_response_retriever import AbstractResponseRetriever
 
-class ResponseRetriever(AbstractResponseRetriever):
+class BackTicksResponseRetriever(AbstractResponseRetriever):
     def __init__(self):
         pass
 

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structural Analysis in Progress</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+        }
+        h1 {
+            color: #2F5597;
+            margin-bottom: 30px;
+        }
+        .animation-container {
+            position: relative;
+            width: 400px;
+            height: 250px;
+            margin-bottom: 40px;
+        }
+        .beam {
+            position: absolute;
+            width: 350px;
+            height: 20px;
+            background-color: #4472C4;
+            bottom: 60px;
+            left: 25px;
+            transform-origin: center;
+            border-radius: 3px;
+            animation: beam-vibrate 3s infinite ease-in-out;
+        }
+        .support {
+            position: absolute;
+            width: 30px;
+            height: 60px;
+            background-color: #404040;
+            bottom: 0;
+        }
+        .support:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 8px;
+            background-color: #2F5597;
+            top: 0;
+            left: -5px;
+        }
+        .support.left {
+            left: 40px;
+        }
+        .support.right {
+            right: 40px;
+        }
+        .support.middle {
+            left: 185px;
+        }
+        .force-arrow {
+            position: absolute;
+            width: 2px;
+            height: 50px;
+            background-color: #d32f2f;
+            bottom: 80px;
+            left: 200px;
+            animation: force-pulse 2s infinite;
+        }
+        .force-arrow:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 12px solid #d32f2f;
+            top: 0;
+            left: -7px;
+        }
+        .udl {
+            position: absolute;
+            width: 140px;
+            height: 4px;
+            background-color: #4CAF50;
+            bottom: 100px;
+            right: 40px;
+        }
+        .udl:before, .udl:after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 30px;
+            background-color: #4CAF50;
+        }
+        .udl:before {
+            left: 0;
+        }
+        .udl:after {
+            right: 0;
+        }
+        .calculations {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 1.0;
+            z-index: -1;
+        }
+        .equation {
+            position: absolute;
+            color: #050505;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            animation: fade-in-out 4s infinite;
+        }
+        .calc-1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .calc-2 { top: 30%; left: 70%; animation-delay: 0.5s; }
+        .calc-3 { top: 50%; left: 30%; animation-delay: 1s; }
+        .calc-4 { top: 70%; left: 50%; animation-delay: 1.5s; }
+        .calc-5 { top: 20%; left: 40%; animation-delay: 2s; }
+        .calc-6 { top: 60%; left: 80%; animation-delay: 2.5s; }
+        .calc-7 { top: 80%; left: 20%; animation-delay: 3s; }
+        
+        .loading-bar-container {
+            width: 300px;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .loading-bar {
+            height: 100%;
+            width: 30%;
+            background-color: #4472C4;
+            border-radius: 5px;
+            animation: progress 3s infinite;
+        }
+        .status {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #666;
+        }
+        
+        /* Moment diagram overlay */
+        .moment-diagram {
+            position: absolute;
+            width: 350px;
+            height: 50px;
+            bottom: 30px;
+            left: 25px;
+            opacity: 0;
+            animation: diagram-fade 6s infinite;
+        }
+        .moment-curve {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            stroke: rgba(255, 152, 0, 0.7);
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 5;
+            animation: dash 3s infinite linear;
+        }
+        
+        @keyframes progress {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            70% { width: 85%; }
+            90% { width: 95%; }
+            100% { width: 0%; }
+        }
+        
+        @keyframes beam-vibrate {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(0.5deg); }
+            75% { transform: rotate(-0.5deg); }
+        }
+        
+        @keyframes force-pulse {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.8); }
+        }
+        
+        @keyframes fade-in-out {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes diagram-fade {
+            0%, 20%, 80%, 100% { opacity: 0; }
+            40%, 60% { opacity: 0.6; }
+        }
+        
+        @keyframes dash {
+            to { stroke-dashoffset: -30; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Structural Analysis in Progress</h1>
+        
+        <div class="animation-container">
+            <div class="calculations">
+                <div class="equation calc-1">M = EI * d²y/dx²</div>
+                <div class="equation calc-2">∑Fy = 0</div>
+                <div class="equation calc-3">V = dM/dx</div>
+                <div class="equation calc-4">δmax = PL³/48EI</div>
+                <div class="equation calc-5">∑M = 0</div>
+                <div class="equation calc-6">∫∫(M/EI)dxdx</div>
+                <div class="equation calc-7">σ = My/I</div>
+            </div>
+            
+            <div class="beam"></div>
+            <div class="support left"></div>
+            <div class="support middle"></div>
+            <div class="support right"></div>
+            <div class="force-arrow"></div>
+            <div class="udl"></div>
+            
+            <svg class="moment-diagram" viewBox="0 0 350 50">
+                <path class="moment-curve" d="M0,25 Q87.5,50 175,25 Q262.5,0 350,25"></path>
+            </svg>
+        </div>
+        
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+</body>
+</html>

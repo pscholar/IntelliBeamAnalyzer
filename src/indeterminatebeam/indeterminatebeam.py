@@ -103,7 +103,7 @@ class Support:
 
     Examples
     --------
-    >>> # Creates a fixed suppot at location 0
+    >>> # Creates a fixed support at location 0
     >>> Support(0, (1,1,1))
     >>> # Creates a pinned support at location 5 m
     >>> Support(5, (1,1,0))

@@ -3,7 +3,7 @@ import tempfile
 import subprocess
 from abstractclasses.abstract_instruction_runner import AbstractInstructionRunner
 
-class InstructionRunner(AbstractInstructionRunner):
+class SimpleInstructionRunner(AbstractInstructionRunner):
     def __init__(self):
         self.temp_dir = tempfile.gettempdir()
 
