@@ -11,4 +11,4 @@ class BackTicksResponseRetriever(AbstractResponseRetriever):
         if matches:
             return matches[0]
         else:
-            return response 
+            return None
