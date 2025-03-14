@@ -6,7 +6,7 @@
 This framework is designed to assess the capabilities of emerging Large Language Models (LLMs), such as GPT-4, in performing structural analysis of beams. The goal is to determine the accuracy and robustness of  LLMs in structural analysis of beams in an agent based framework and their  ability to make sense of results to generate quality(fit for purpose) structural analysis reports.
 </p>
 
-![User Interface](resources/ui.jpg)
+![User Interface](resources/ui_small.jpg)
 
 ## Framework Components
 
