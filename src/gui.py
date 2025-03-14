@@ -6,16 +6,19 @@ from perform import perform_analysis
 from pdf_generator import PDFGenerator
 import os
 import constants
+from model_interface import GPTModelInterface 
+from model_interface import CLDModelInterface
 
 class AnalysisWorker(QThread):
     finished = pyqtSignal(str)  
 
-    def __init__(self, task, LLM = constants.DEFAULT_LLM):
+    def __init__(self, model, task):
         super().__init__()
+        self.model = model
         self.task = task
-        self.LLM = LLM
+
     def run(self):
-        report_file = perform_analysis(self.task, self.LLM)
+        report_file = perform_analysis(self.task, self.model)
         self.finished.emit(report_file)
 
 class PrintWorker(QThread):
@@ -27,11 +30,8 @@ class PrintWorker(QThread):
 
     def run(self):
         QtCore.QMetaObject.invokeMethod(self.parent(), "generate_pdf", 
-                                        QtCore.Qt.QueuedConnection, 
+                                         QtCore.Qt.QueuedConnection, 
                                         QtCore.Q_ARG(str, self.file_path))
-
-
-
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -50,12 +50,30 @@ class MainWindow(QtWidgets.QMainWindow):
         left_layout = QtWidgets.QVBoxLayout(left_panel)
         chat_display = QtWidgets.QWidget()
         chat_display.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        self.input_area = QtWidgets.QTextEdit()
-        font = QFont("Segoe UI", 12)
+        font = QFont("Segoe UI", 10)
         font.setStyleHint(QFont.Monospace)
+        self.api_label = QtWidgets.QLabel("API KEY",self)
+        self.api_label.setFont(font)
+        self.api_label.setStyleSheet("""
+                    QLabel {
+                        background-color: #0066cc;
+                        color: white;
+                        border: none;
+                        padding: 5px 5px;
+                     }""")
+        self.api_label.setSizePolicy(QtWidgets.QSizePolicy.Maximum,QtWidgets.QSizePolicy.Fixed)
+        self.api_input_area = QtWidgets.QLineEdit()
+        self.api_input_area.setPlaceholderText("Put API key here")
+        self.api_input_area.setFont(font)
+        self.api_input_area.setSizePolicy(QtWidgets.QSizePolicy.Expanding,QtWidgets.QSizePolicy.Fixed)
+        api_layout = QtWidgets.QHBoxLayout()
+        api_layout.addWidget(self.api_label)
+        api_layout.addWidget(self.api_input_area)
+        self.input_area = QtWidgets.QTextEdit()   
         self.input_area.setFont(font)
         self.input_area.setAcceptRichText(False)
         self.input_area.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.input_area.setPlaceholderText("Enter Beam Analysis Problem")
         self.print_button = QtWidgets.QPushButton("Print Report")
         self.print_button.setFixedWidth(100)
         self.print_button.clicked.connect(self.on_print)        
@@ -64,14 +82,15 @@ class MainWindow(QtWidgets.QMainWindow):
         button_layout = QtWidgets.QHBoxLayout()
         button_layout.addWidget(self.print_button)
         button_layout.addStretch()
-        button_layout.addWidget(self.send_button)      
+        button_layout.addWidget(self.send_button) 
+        left_layout.addLayout(api_layout)     
         left_layout.addWidget(chat_display)
         left_layout.addWidget(self.input_area)
         left_layout.addLayout(button_layout)       
         self.pdf_viewer = QtWebEngineWidgets.QWebEngineView()
         settings = self.pdf_viewer.settings()
         settings.setAttribute(QtWebEngineWidgets.QWebEngineSettings.PluginsEnabled, True)
-        url = QtCore.QUrl.fromLocalFile(os.path.abspath(constants.REPORTFILE))
+        url = QtCore.QUrl.fromLocalFile(os.path.abspath(constants.WELCOMEFILE))
         self.pdf_viewer.load(url)
         splitter.addWidget(left_panel)
         splitter.addWidget(self.pdf_viewer)
@@ -133,6 +152,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.current_model = model_name
         model_button = self.menuBar().cornerWidget(Qt.TopLeftCorner)
         model_button.setText(f'Model: {model_name}')
+        self.api_input_area.clear()
     
     def apply_theme(self, dark):
         if dark:
@@ -220,10 +240,20 @@ class MainWindow(QtWidgets.QMainWindow):
         text = self.input_area.toPlainText().strip()
         if not text:
             return    
-        print(text)     
+        api_key = self.api_input_area.text()
+        if not api_key:
+            return 
+        model = None
+        try:
+            if self.current_model == constants.GPT_LLM:
+                model= GPTModelInterface(openai_api_key=api_key)
+            elif self.current_model == constants.CLAUDE_LLM:
+                model = CLDModelInterface(anthropic_api_key=api_key)
+        except Exception as e:
+            print(f"Failed to Initialize Model Interface: {e}")
         working_path = QtCore.QUrl.fromLocalFile(os.path.abspath(constants.WORKINGFILE))
         self.pdf_viewer.load(working_path)
-        self.worker = AnalysisWorker(task=text, LLM=self.current_model)
+        self.worker = AnalysisWorker(model=model, task=text)
         self.worker.finished.connect(self.on_analysis_complete)
         self.worker.start()
 
