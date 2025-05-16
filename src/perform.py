@@ -8,6 +8,7 @@ import constants
 def perform_analysis(task, model = None):
     if model is None:
       return None
+    #print("Here1")
     TP = TaskPackager()
     BTR = BackTicksResponseRetriever()
     SIP = SimpleInstructionRunner()
@@ -19,6 +20,7 @@ def perform_analysis(task, model = None):
     if code is None:
        return None    
     results = SIP.save_and_run(code=code,output_file=constants.OUTPUTFILE)
+    #print(results)
     sys_prompt, task = TP.package_task(user_input=results,task_type="report")
     response = model.send_to_model(system_prompt=sys_prompt,task=task)
     if response is None:

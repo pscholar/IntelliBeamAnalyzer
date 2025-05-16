@@ -4,6 +4,7 @@ from typing import Optional
 from openai import OpenAI
 import constants
 
+
 class GPTModelInterface(AbstractModelInterface):
     def __init__(self, openai_api_key: str):
         self.client = OpenAI(api_key=openai_api_key)  
@@ -11,12 +12,12 @@ class GPTModelInterface(AbstractModelInterface):
     def send_to_model(self, system_prompt: str, task: str) -> str:       
         try:
             response = self.client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4-1106-preview",
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": task}
                 ],
-                max_tokens= constants.MAX_GPT_TOKENS,
+                #max_tokens= constants.MAX_GPT_TOKENS,
                 temperature= constants.GPT_TEMPERATURE,
                 n=1,
                 stop=None

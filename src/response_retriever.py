@@ -1,14 +1,16 @@
 import re
 from abstractclasses.abstract_response_retriever import AbstractResponseRetriever
 
-class BackTicksResponseRetriever(AbstractResponseRetriever):
+class BackTicksResponseRetriever:
     def __init__(self):
         pass
 
     def parse_response(self, response: str) -> str:
-        code_pattern = re.compile(r'```(.*?)```', re.DOTALL) 
+        code_pattern = re.compile(r'```(?:\w+)?\n(.*?)```', re.DOTALL)
         matches = code_pattern.findall(response)
         if matches:
-            return matches[0]
+            #print(matches[0].strip())
+            return matches[0].strip()  
         else:
             return None
+

@@ -1,128 +1,71 @@
 {
-    "task": "",
-    "reactions": [
-        [
-            0,
-            0.0,
-            9131.579,
-            13763.158
-        ],
-        [
-            6,
-            0,
-            21463.158,
-            0
-        ],
-        [
-            11,
-            0.0,
-            7405.263,
-            0
-        ]
+  "task": "",
+  "reactions": [
+    [
+      0,
+      0.0,
+      71285.7143,
+      0
     ],
-    "midspan_shear": [
-        [
-            3.0,
-            9131.579
-        ],
-        [
-            8.5,
-            2594.737
-        ]
+    [
+      7,
+      0,
+      82714.2857,
+      0
+    ]
+  ],
+  "midspan_shear": [
+    [
+      3.5,
+      -5714.2879
+    ]
+  ],
+  "support_shear": [
+    [
+      0,
+      71285.7121
     ],
-    "support_shear": [
-        [
-            0,
-            9131.579
-        ],
-        [
-            6,
-            12594.736
-        ],
-        [
-            11,
-            -7405.263
-        ]
+    [
+      7,
+      -82714.2835
+    ]
+  ],
+  "max_shear": [
+    71285.7143
+  ],
+  "min_shear": [
+    -82714.2835
+  ],
+  "abs_max_shear": [
+    82714.2835
+  ],
+  "midspan_moment": [
+    [
+      3.5,
+      154749.9994
+    ]
+  ],
+  "support_moment": [
+    [
+      0,
+      0.0071
     ],
-    "max_shear": [
-        12594.736
-    ],
-    "min_shear": [
-        -8868.421
-    ],
-    "abs_max_shear": [
-        12594.736
-    ],
-    "midspan_moment": [
-        [
-            3.0,
-            13631.578
-        ],
-        [
-            8.5,
-            6013.158
-        ]
-    ],
-    "support_moment": [
-        [
-            0,
-            -13763.157
-        ],
-        [
-            6,
-            -12973.683
-        ],
-        [
-            11,
-            0.001
-        ]
-    ],
-    "max_moment": [
-        13631.578
-    ],
-    "min_moment": [
-        -13763.158
-    ],
-    "abs_max_moment": [
-        13763.158
-    ],
-    "deflections_at_supports": [
-        [
-            0,
-            0.0
-        ],
-        [
-            6,
-            -0.0
-        ],
-        [
-            11,
-            -0.0
-        ]
-    ],
-    "deflections_at_midspans": [
-        [
-            3.0,
-            -9.7697e-05
-        ],
-        [
-            8.5,
-            -5.7566e-05
-        ]
-    ],
-    "max_deflection": [
-        1.06e-07
-    ],
-    "min_deflection": [
-        1.06e-07
-    ],
-    "abs_max_deflection": [
-        9.7697e-05
-    ],
-    "beam-loading-schematic": "results/fig1.png",
-    "reaction-force-schematic": "results/fig2.png",
-    "normal-force-schematic": "results/fig3.png",
-    "shear-force-schematic": "results/fig4.png",
-    "bending-moment-schematic": "results/fig5.png",
-    "deflection-schematic": "results/fig6.png"
+    [
+      7,
+      0.0083
+    ]
+  ],
+  "max_moment": [
+    154749.9994
+  ],
+  "min_moment": [
+    0.0
+  ],
+  "abs_max_moment": [
+    154749.9994
+  ],
+  "beam-loading-schematic": "fig1.png",
+  "reaction-force-schematic": "fig2.png",
+  "shear-force-schematic": "fig4.png",
+  "bending-moment-schematic": "fig5.png"
 }

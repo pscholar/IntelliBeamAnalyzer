@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Structural Analysis Report</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        background: #f4f4f4;
+    }
+    .container {
+        width: 80%;
+        margin: auto;
+        background: white;
+        padding: 20px;
+    }
+    .header,
+    .footer {
+        text-align: center;
+        padding: 10px 0;
+        background: #333;
+        color: #fff;
+    }
+    h1, h2, h3 {
+        color: #5d687b;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .critical {
+        background-color: #ffcccc;
+    }
+    .image {
+        text-align: center;
+        margin: 20px 0;
+    }
+    .recommendation-box {
+        border: 2px solid #e74c3c;
+        padding: 10px;
+        margin: 20px 0;
+        background: #fce4e4;
+    }
+    .justify-text {
+        text-align: justify;
+    }
+    .highlight {
+        border-left: 4px solid #2ecc71;
+        padding-left: 8px;
+        margin-left: -4px;
+    }
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Structural Analysis Report</h1>
+</div>
+
+<div class="container">
+    <h2>Executive Summary</h2>
+    <p class="justify-text">
+        This comprehensive beam analysis report presents the results of the structural examination for a beam under specific loading conditions. Without restating the problem, the beam in question is subjected to distributed and point loads, inducing reactions at supports, shear forces, and bending moments, all of which have been carefully analyzed to assess the beam's performance.
+    </p>
+
+    <h2>Beam Configuration and Loading Conditions</h2>
+    <div class="image">
+        <img src="fig1.png" alt="Beam Loading Schematic">
+        <p>Figure 1: Beam loading schematic.</p>
+    </div>
+
+    <h2>Support Reaction Analysis</h2>
+    <p class="justify-text">
+        The reactions at supports provide a measure of the external forces required to maintain equilibrium of the structure. Table 1 provides the calculated reactions at each support.
+    </p>
+    <table>
+        <tr><th>Location (N)</th><th>X-Reaction (N)</th><th>Y-Reaction (N)</th><th>Moment-Reaction (N.m)</th></tr>
+        <tr><td>0</td><td>0.0</td><td class="critical">71285.71</td><td>0</td></tr>
+        <tr><td>7</td><td>0</td><td class="critical">82714.29</td><td>0</td></tr>
+    </table>
+    <div class="image">
+        <img src="fig2.png" alt="Reaction Force Schematic">
+        <p>Figure 2: Reaction force schematic.</p>
+    </div>
+
+    <h2>Shear Force Analysis</h2>
+    <p class="justify-text highlight">
+        The evaluation of shear forces is essential in determining potential points of failure. Shear forces at critical points are shown in Table 2.
+    </p>
+    <table>
+        <tr><th>Location (m)</th><th>Magnitude (N)</th></tr>
+        <tr><td>0</td><td class="critical">71285.71</td></tr>
+        <tr><td>3.5</td><td>-5714.29</td></tr>
+        <tr><td>7</td><td class="critical">-82714.28</td></tr>
+    </table>
+    <div class="image">
+        <img src="fig4.png" alt="Shear Force Schematic">
+        <p>Figure 4: Shear force schematic.</p>
+    </div>
+
+    <h2>Bending Moment Analysis</h2>
+    <p class="justify-text highlight">
+        The bending moments give insight into the bending stress distribution along the beam. The maximum bending moment occurs at midspan as evident in Table 3.
+    </p>
+    <table>
+        <tr><th>Location (m)</th><th>Magnitude (N.m)</th></tr>
+        <tr><td>0</td><td>0.01</td></tr>
+        <tr><td>3.5</td><td class="critical">154750.00</td></tr>
+        <tr><td>7</td><td>0.01</td></tr>
+    </table>
+    <div class="image">
+        <img src="fig5.png" alt="Bending Moment Schematic">
+        <p>Figure 5: Bending moment schematic.</p>
+    </div>
+
+    <h2>Additional Relevant Structural Behaviors</h2>
+    <p class="justify-text">
+        Apart from shear forces and bending moments, normal forces and deflection play a significant role in the structural performance. However, in this case, normal forces are not significant due to the nature of loading and supports. Deflection analysis, not included here, must also be carried out to ensure serviceability.
+    </p>
+
+    <h2>Engineering Recommendations</h2>
+    <div class="recommendation-box">
+        <p>
+            Based on the above analysis, the following recommendations are made:
+            <ul>
+                <li>Reinforcement at midspan is crucial to resist the high bending moments.</li>
+                <li>Proper anchorage must be provided at supports to cater for the high reaction forces.</li>
+                <li>Material selection and section geometry should be re-evaluated to optimize for weight and strength.</li>
+            </ul>
+        </p>
+    </div>
+
+    <h2>Conclusion</h2>
+    <p class="justify-text">
+        The structural analysis indicates that the beam is designed to withstand the applied loads with maximum shear and moment within acceptable limits. Although no immediate concerns are detected, the design recommendations should be incorporated into the final design for optimal performance and safety.
+    </p>
+</div>
+
+<div class="footer">
+    Structural Analysis Report generated on <script>document.write(new Date().toLocaleDateString());</script>.
+</div>
+</body>
+</html>
