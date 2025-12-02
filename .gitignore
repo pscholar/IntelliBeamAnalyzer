@@ -252,3 +252,4 @@ fabric.properties
 *.pdf
 venv/
 .venv/
+src/indeterminatebeam/
